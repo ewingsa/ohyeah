@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WheelComponent">
+        <attr name="android:entries" />
+        <attr name="android:textColor" />
+        <attr name="android:textSize" format="dimension" />
+        <attr name="closeItemColor" format="color" />
+        <attr name="normalItemColor" format="color" />
+        <attr name="listener" format="reference" />
+        <attr name="position" format="integer" />
+    </declare-styleable>
+</resources>

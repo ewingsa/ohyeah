@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_image">The reminder\'s accompanying image</string>
+    <string name="message_new">New</string>
+</resources>

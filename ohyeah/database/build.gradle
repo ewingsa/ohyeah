@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../ktlint.gradle'
+
+dependencies {
+    implementation "$deps.room_rxjava"
+
+    kapt "$deps.dagger_compiler"
+    kapt "$deps.dagger_android_processor"
+    implementation "$deps.dagger"
+    implementation "$deps.dagger_android_support"
+
+    kapt "$deps.room_compiler"
+    implementation "$deps.room_runtime"
+
+    implementation project(':injection')
+}

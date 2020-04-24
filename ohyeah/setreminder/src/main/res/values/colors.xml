@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="set_reminder_selected_item">#000000</color>
+    <color name="set_reminder_close_item">#696969</color>
+    <color name="set_reminder_normal_item">#808080</color>
+</resources>

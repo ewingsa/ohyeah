@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../ktlint.gradle'
+
+dependencies {
+    implementation "$deps.material"
+
+    testImplementation "$deps.junit"
+    testImplementation "$deps.mockito"
+    testImplementation "$deps.mockito_inline"
+
+    implementation project(':messages')
+    implementation project(':injection')
+    implementation project(':routing')
+    implementation project(':viper')
+}

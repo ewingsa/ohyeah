@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ewingsa.ohyeah.info.InfoViewModel">
+        </variable>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/info_header"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/info_back_button"
+                android:layout_width="@dimen/s24dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/s16dp"
+                android:background="@drawable/back_button"
+                android:contentDescription="@string/back_button"
+                android:onClick="@{viewModel.onBackPress}" />
+        </FrameLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/info_tutorial_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/info_tutorial_dot_indicator"
+            android:layout_below="@id/info_header" />
+
+        <LinearLayout
+            android:id="@+id/info_tutorial_dot_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_above="@id/info_open_source_licenses_separator"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <View
+            android:id="@+id/info_open_source_licenses_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s1dp"
+            android:layout_above="@id/info_open_source_licenses"
+            android:layout_marginTop="@dimen/s24dp"
+            android:background="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/info_open_source_licenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:layout_marginTop="@dimen/s8dp"
+            android:text="@string/info_open_source_licenses"
+            android:background="@android:color/transparent"
+            android:onClick="@{viewModel.onOpenSourceLicensesPress}" />
+    </RelativeLayout>
+</layout>

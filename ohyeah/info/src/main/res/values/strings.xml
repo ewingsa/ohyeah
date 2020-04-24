@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info_app_description">Oh Yeah!\n\ntreats reminders\nlike messages</string>
+    <string name="info_tutorial_call_to_action">Schedule\nand organize\nreminders\nfor every\noccasion!</string>
+    <string name="info_tutorial_edit_reminder">To edit a\nreminder press\nand hold it</string>
+    <string name="info_tutorial_image">An example of the description on this page of the tutorial</string>
+    <string name="info_tutorial_messages">They even look\nlike messages!</string>
+    <string name="info_tutorial_notification">At the set time\na notification\nwill be sent!</string>
+    <string name="info_tutorial_set_reminder">To set a\nreminder press\nthis button</string>
+    <string name="info_tutorial_topics">… which can be\norganized\nby topic</string>
+    <string name="info_open_source_licenses">Open Source Licenses</string>
+</resources>

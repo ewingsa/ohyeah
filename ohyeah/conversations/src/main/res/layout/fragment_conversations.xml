@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ewingsa.ohyeah.conversations.viewmodels.ConversationsScreenViewModel">
+        </variable>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/conversation_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/conversation_no_reminders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/s16dp"
+            android:text="@string/conversation_no_reminders"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/s24sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/conversation_info_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/s16dp"
+            android:onClick="@{viewModel.onInfoPress}"
+            app:backgroundTint="@android:color/white"
+            app:srcCompat="@drawable/question" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/conversation_make_new_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/s16dp"
+            android:onClick="@{viewModel.onNewPress}"
+            app:backgroundTint="@color/green"
+            app:srcCompat="@drawable/ic_ohyeah" />
+    </FrameLayout>
+</layout>

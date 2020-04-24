@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: '../ktlint.gradle'
+
+dependencies {
+    implementation "$deps.app_compat"
+
+    implementation project(':resources')
+}

@@ -1,0 +1,29 @@
+apply from: 'versions.gradle'
+
+ext.deps = [
+        gradle                   : "com.android.tools.build:gradle:$versions.gradle",
+        gradle_bintray           : "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.gradle_bintray",
+        kotlin_gradle_plugin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+        licenses                 : "com.jaredsburrows:gradle-license-plugin:$versions.licenses",
+
+        app_compat                : "androidx.appcompat:appcompat:$versions.app_compat",
+        exif_interface            : "androidx.exifinterface:exifinterface:$versions.exif_interface",
+        material                 : "com.google.android.material:material:$versions.material",
+
+        dagger                   : "com.google.dagger:dagger:$versions.dagger",
+        dagger_compiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
+        dagger_android_support   : "com.google.dagger:dagger-android-support:$versions.dagger",
+        dagger_android_processor : "com.google.dagger:dagger-android-processor:$versions.dagger",
+
+        rxandroid                : "io.reactivex.rxjava2:rxandroid:$versions.rxandroid",
+        rxkotlin                 : "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin",
+
+        room_runtime             : "androidx.room:room-runtime:$versions.room",
+        room_compiler            : "androidx.room:room-compiler:$versions.room",
+        room_rxjava              : "androidx.room:room-rxjava2:$versions.room_rxjava",
+
+        junit                    : "junit:junit:$versions.junit",
+        android_junit            : "androidx.test.ext:junit:$versions.androidjunit",
+        mockito                  : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito",
+        mockito_inline           : "org.mockito:mockito-inline:$versions.mockito_inline"
+]

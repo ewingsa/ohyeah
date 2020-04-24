@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jaredsburrows.license'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../ktlint.gradle'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+        }
+    }
+}
+
+dependencies {
+    implementation "$deps.app_compat"
+    implementation "$deps.material"
+    implementation "$deps.rxandroid"
+    implementation "$deps.rxkotlin"
+
+    kapt "$deps.dagger_compiler"
+    kapt "$deps.dagger_android_processor"
+    implementation "$deps.dagger"
+    implementation "$deps.dagger_android_support"
+
+    testImplementation "$deps.junit"
+    testImplementation "$deps.mockito"
+    testImplementation "$deps.mockito_inline"
+
+    implementation project(':conversations')
+    implementation project(':database')
+    implementation project(':deeplink')
+    implementation project(':helpers')
+    implementation project(':info')
+    implementation project(':injection')
+    implementation project(':messages')
+    implementation project(':push')
+    implementation project(':receiver')
+    implementation project(':resources')
+    implementation project(':setreminder')
+    implementation project(':viper')
+}

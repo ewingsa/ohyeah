@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ewingsa.ohyeah.messages.viewmodels.MessagesToolbarViewModel">
+        </variable>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/message_back_button"
+                android:layout_width="@dimen/s24dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="@dimen/s16dp"
+                android:background="@drawable/back_button"
+                android:contentDescription="@string/back_button"
+                android:onClick="@{viewModel.onBackPress}" />
+
+            <TextView
+                android:id="@+id/message_sender_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/message_back_button"
+                android:layout_toRightOf="@id/message_back_button"
+                android:layout_toStartOf="@id/message_new_button"
+                android:layout_toLeftOf="@id/message_new_button"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/s16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/message_new_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:layout_margin="@dimen/s16dp"
+                android:text="@string/message_new"
+                android:textColor="@color/color_accent"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"
+                android:onClick="@{viewModel.onNewPress}" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/message_header_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s1dp"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:background="@android:color/darker_gray" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/message_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>

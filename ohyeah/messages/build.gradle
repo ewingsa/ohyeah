@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../ktlint.gradle'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation "$deps.dagger"
+    implementation "$deps.material"
+    implementation "$deps.rxandroid"
+    implementation "$deps.rxkotlin"
+
+    testImplementation "$deps.junit"
+    testImplementation "$deps.mockito"
+    testImplementation "$deps.mockito_inline"
+
+    implementation project(':database')
+    implementation project(':helpers')
+    implementation project(':injection')
+    implementation project(':routing')
+    implementation project(':setreminder')
+    implementation project(':viper')
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ohyeah/app" />
+      <module fileurl="file://$PROJECT_DIR$/conversations/conversations.iml" filepath="$PROJECT_DIR$/conversations/conversations.iml" group="ohyeah/conversations" />
+      <module fileurl="file://$PROJECT_DIR$/database/database.iml" filepath="$PROJECT_DIR$/database/database.iml" group="ohyeah/database" />
+      <module fileurl="file://$PROJECT_DIR$/deeplink/deeplink.iml" filepath="$PROJECT_DIR$/deeplink/deeplink.iml" group="ohyeah/deeplink" />
+      <module fileurl="file://$PROJECT_DIR$/helpers/helpers.iml" filepath="$PROJECT_DIR$/helpers/helpers.iml" group="ohyeah/helpers" />
+      <module fileurl="file://$PROJECT_DIR$/info/info.iml" filepath="$PROJECT_DIR$/info/info.iml" group="ohyeah/info" />
+      <module fileurl="file://$PROJECT_DIR$/injection/injection.iml" filepath="$PROJECT_DIR$/injection/injection.iml" group="ohyeah/injection" />
+      <module fileurl="file://$PROJECT_DIR$/messages/messages.iml" filepath="$PROJECT_DIR$/messages/messages.iml" group="ohyeah/messages" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ohyeah.iml" filepath="$PROJECT_DIR$/.idea/ohyeah.iml" group="ohyeah" />
+      <module fileurl="file://$PROJECT_DIR$/push/push.iml" filepath="$PROJECT_DIR$/push/push.iml" group="ohyeah/push" />
+      <module fileurl="file://$PROJECT_DIR$/receiver/receiver.iml" filepath="$PROJECT_DIR$/receiver/receiver.iml" group="ohyeah/receiver" />
+      <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" group="ohyeah/resources" />
+      <module fileurl="file://$PROJECT_DIR$/routing/routing.iml" filepath="$PROJECT_DIR$/routing/routing.iml" group="ohyeah/routing" />
+      <module fileurl="file://$PROJECT_DIR$/setreminder/setreminder.iml" filepath="$PROJECT_DIR$/setreminder/setreminder.iml" group="ohyeah/setreminder" />
+      <module fileurl="file://$PROJECT_DIR$/viper/viper.iml" filepath="$PROJECT_DIR$/viper/viper.iml" group="ohyeah/viper" />
+      <module fileurl="file://$PROJECT_DIR$/wheelcomponent/wheelcomponent.iml" filepath="$PROJECT_DIR$/wheelcomponent/wheelcomponent.iml" group="ohyeah/wheelcomponent" />
+    </modules>
+  </component>
+</project>

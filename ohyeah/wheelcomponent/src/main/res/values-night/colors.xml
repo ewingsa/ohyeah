@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wheel_selected_item">#FFFFFF</color>
+    <color name="wheel_close_item">#969696</color>
+    <color name="wheel_normal_item">#7F7F7F</color>
+</resources>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.ewingsa.ohyeah.setreminder.WheelType" />
+        <variable
+            name="viewModel"
+            type="com.ewingsa.ohyeah.setreminder.ReminderViewModel">
+        </variable>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/set_reminder_back_button"
+                android:layout_width="@dimen/s24dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="@dimen/s16dp"
+                android:background="@drawable/back_button"
+                android:contentDescription="@string/back_button"
+                android:onClick="@{viewModel.onBackPress}" />
+
+            <Space
+                android:id="@+id/set_reminder_header_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/set_reminder_back_button"
+                android:layout_toRightOf="@id/set_reminder_back_button"
+                android:layout_toStartOf="@id/set_reminder_delete_button"
+                android:layout_toLeftOf="@id/set_reminder_delete_button" />
+
+            <Button
+                android:id="@+id/set_reminder_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/s16dp"
+                android:text="@string/set_reminder_delete"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"
+                android:onClick="@{viewModel.onDeletePress}" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/set_reminder_header_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:background="@android:color/darker_gray" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/s16dp"
+                android:layout_marginStart="@dimen/s16dp">
+
+                <EditText
+                    android:id="@+id/set_reminder_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/s8dp"
+                    android:hint="@string/set_reminder_message"
+                    android:importantForAutofill="no"
+                    android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
+                    android:maxLines="3"
+                    android:text="@={viewModel.message}" />
+
+                <EditText
+                    android:id="@+id/set_reminder_sender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/s16dp"
+                    android:hint="@string/set_reminder_topic"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textCapWords|textAutoCorrect"
+                    android:maxLines="1"
+                    android:text="@={viewModel.sender}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/s8dp">
+
+                    <Button
+                        android:id="@+id/set_reminder_date_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/set_reminder_select_date"
+                        android:textColor="@color/color_accent"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{viewModel.onDatePress}" />
+
+                    <TextView
+                        android:id="@+id/set_reminder_date_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@={viewModel.date}"
+                        tools:text="Mon, Jan 1, 2020" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:orientation="horizontal">
+
+                    <com.ewingsa.ohyeah.wheelcomponent.WheelComponent
+                        android:id="@+id/set_reminder_hour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:entries="@array/set_reminder_hours"
+                        android:textColor="@color/set_reminder_selected_item"
+                        android:textSize="@dimen/s24sp"
+                        app:closeItemColor="@color/set_reminder_close_item"
+                        app:normalItemColor="@color/set_reminder_normal_item"
+                        app:listener="@{viewModel.hourListener}"
+                        app:position="@{viewModel.getPosition(WheelType.HOURS)}" />
+
+                    <TextView
+                        android:id="@+id/set_reminder_colon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/set_reminder_colon"
+                        android:textColor="@color/set_reminder_selected_item"
+                        android:textSize="40sp" />
+
+                    <com.ewingsa.ohyeah.wheelcomponent.WheelComponent
+                        android:id="@+id/set_reminder_minute"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:entries="@array/set_reminder_minutes"
+                        android:textColor="@color/set_reminder_selected_item"
+                        android:textSize="@dimen/s24sp"
+                        app:closeItemColor="@color/set_reminder_close_item"
+                        app:normalItemColor="@color/set_reminder_normal_item"
+                        app:listener="@{viewModel.minuteListener}"
+                        app:position="@{viewModel.getPosition(WheelType.MINUTES)}" />
+
+                    <com.ewingsa.ohyeah.wheelcomponent.WheelComponent
+                        android:id="@+id/set_reminder_am_pm"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:entries="@array/set_reminder_meridies"
+                        android:textColor="@color/set_reminder_selected_item"
+                        android:textSize="@dimen/s24sp"
+                        app:closeItemColor="@color/set_reminder_close_item"
+                        app:normalItemColor="@color/set_reminder_normal_item"
+                        app:listener="@{viewModel.amPmListener}"
+                        app:position="@{viewModel.getPosition(WheelType.MERIDIES)}" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/s8dp">
+
+                    <Button
+                        android:id="@+id/set_reminder_picture_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/set_reminder_select_photo"
+                        android:textColor="@color/color_accent"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{viewModel.onSelectPhotoPress}" />
+
+                    <TextView
+                        android:id="@+id/set_reminder_picture_prompt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="@string/set_reminder_photo" />
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/set_reminder_picture_preview"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            android:maxHeight="100dp"
+                            android:scaleType="centerCrop"
+                            android:src="@{viewModel.senderPicture}"
+                            android:contentDescription="@string/set_reminder_photo_preview" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/set_reminder_save_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/s1dp"
+                    android:layout_marginTop="@dimen/s8dp"
+                    android:background="@android:color/darker_gray" />
+
+                <Button
+                    android:id="@+id/set_reminder_save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/s8dp"
+                    android:layout_marginTop="@dimen/s8dp"
+                    android:text="@string/set_reminder_save"
+                    android:textColor="@color/color_accent"
+                    android:textSize="20sp"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{viewModel.onSavePress}" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

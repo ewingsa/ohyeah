@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/conversation_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/conversation_view_image"
+            android:layout_width="@dimen/s48dp"
+            android:layout_height="@dimen/s48dp"
+            android:layout_alignBottom="@id/conversation_view_preview"
+            android:layout_alignTop="@id/conversation_view_title"
+            android:layout_marginEnd="@dimen/s16dp"
+            android:layout_marginStart="@dimen/s16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/conversation_image"
+            app:srcCompat="@drawable/ic_ohyeah" />
+
+        <TextView
+            android:id="@+id/conversation_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/conversation_view_image"
+            android:layout_toRightOf="@id/conversation_view_image"
+            android:layout_toStartOf="@id/conversation_view_time"
+            android:layout_toLeftOf="@id/conversation_view_time"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:layout_marginTop="@dimen/s8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/s16sp"
+            android:textStyle="bold"
+            tools:text="Conversation Title" />
+
+        <TextView
+            android:id="@+id/conversation_view_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:layout_marginEnd="@dimen/s16dp"
+            android:layout_marginRight="@dimen/s16dp"
+            android:layout_marginTop="@dimen/s8dp"
+            android:textSize="@dimen/s16sp"
+            tools:text="Jan 1" />
+
+        <TextView
+            android:id="@+id/conversation_view_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/conversation_view_title"
+            android:layout_toEndOf="@id/conversation_view_image"
+            android:layout_toRightOf="@id/conversation_view_image"
+            android:layout_toStartOf="@id/conversation_view_unread"
+            android:layout_toLeftOf="@id/conversation_view_unread"
+            android:layout_marginBottom="@dimen/s8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Conversation Preview" />
+
+        <TextView
+            android:id="@+id/conversation_view_unread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/conversation_view_time"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/s24dp"
+            android:layout_marginRight="@dimen/s24dp"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s16sp"
+            android:background="@drawable/unread_circle"
+            android:visibility="invisible" />
+
+        <View
+            android:id="@+id/conversation_view_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s1dp"
+            android:layout_below="@id/conversation_view_preview"
+            android:layout_marginEnd="@dimen/s32dp"
+            android:layout_marginStart="@dimen/s32dp"
+            android:background="@android:color/darker_gray" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/conversation_view_upcoming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s8dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/conversation_view_upcoming_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/conversation_future_topics"
+            android:textSize="@dimen/s16sp" />
+
+        <View
+            android:id="@+id/conversation_view_upcoming_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s1dp"
+            android:layout_below="@id/conversation_view_upcoming_text"
+            android:layout_marginEnd="@dimen/s32dp"
+            android:layout_marginStart="@dimen/s32dp"
+            android:background="@android:color/darker_gray" />
+    </RelativeLayout>
+</FrameLayout>
