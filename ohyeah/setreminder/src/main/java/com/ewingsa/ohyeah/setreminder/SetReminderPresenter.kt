@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import com.ewingsa.ohyeah.setreminder.helpers.PermissionHelper
 import com.ewingsa.ohyeah.viper.ViperContract
 import javax.inject.Inject
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class SetReminderPresenter @Inject constructor(
     private val interactor: SetReminderContract.Interactor,
@@ -53,13 +54,13 @@ class SetReminderPresenter @Inject constructor(
             AlertDialog.Builder(it)
                 .setTitle(resources.getString(R.string.set_reminder_delete_reminder))
                 .setMessage(resources.getString(R.string.set_reminder_delete_reminder_message))
-                .setIcon(R.drawable.ic_ohyeah)
-                .setPositiveButton(android.R.string.yes) { _, whichButton ->
+                .setIcon(MainR.drawable.ic_ohyeah)
+                .setPositiveButton(android.R.string.ok) { _, whichButton ->
                     if (whichButton == -1) {
                         interactor.deleteReminder()
                     }
                 }
-                .setNegativeButton(android.R.string.no, null).show()
+                .setNegativeButton(android.R.string.cancel, null).show()
         }
     }
 

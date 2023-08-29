@@ -20,7 +20,6 @@ abstract class ApplicationBindingModule {
 
         @PerApplication
         @Provides
-        @JvmStatic
         fun provideResources(mainApplication: MainApplication): Resources = mainApplication.resources
     }
 }

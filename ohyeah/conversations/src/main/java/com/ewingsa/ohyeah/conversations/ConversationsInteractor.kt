@@ -25,6 +25,7 @@ class ConversationsInteractor @Inject constructor(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var dateHelper = DateHelper
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var intentHelper = IntentHelper
 

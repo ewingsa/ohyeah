@@ -2,15 +2,12 @@ package com.ewingsa.ohyeah.messages
 
 import com.ewingsa.ohyeah.appinjection.qualifiers.IoThreadScheduler
 import com.ewingsa.ohyeah.appinjection.qualifiers.MainThreadScheduler
-import com.ewingsa.ohyeah.database.Message
 import com.ewingsa.ohyeah.database.MessageDao
-import com.ewingsa.ohyeah.database.Sender
 import com.ewingsa.ohyeah.database.SenderMessage
 import com.ewingsa.ohyeah.viper.ViperContract
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
@@ -30,12 +27,11 @@ class MessagesRepository @Inject constructor(
 
     override fun fetchMessages(senderId: Long) {
         Observable.zip(
-                messageDao.getExistingConversation(senderId).toObservable(),
-                messageDao.findMessages(senderId),
-                BiFunction<Sender, List<Message>, List<SenderMessage>> {
-                    sender, messages -> messages.map { SenderMessage(sender, it) }
-                }
-            )
+            messageDao.getExistingConversation(senderId).toObservable(),
+            messageDao.findMessages(senderId)
+        ) { sender, messages ->
+            messages.map { SenderMessage(sender, it) }
+        }
             .subscribeOn(ioThreadScheduler)
             .observeOn(mainThreadScheduler)
             .subscribe(

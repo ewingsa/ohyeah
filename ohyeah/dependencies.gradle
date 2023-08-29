@@ -2,7 +2,6 @@ apply from: 'versions.gradle'
 
 ext.deps = [
         gradle                   : "com.android.tools.build:gradle:$versions.gradle",
-        gradle_bintray           : "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.gradle_bintray",
         kotlin_gradle_plugin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
         licenses                 : "com.jaredsburrows:gradle-license-plugin:$versions.licenses",
 

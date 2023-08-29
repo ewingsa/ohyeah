@@ -7,6 +7,7 @@ open class BaseViperFragment<P : ViperContract.Presenter, R : ViperContract.Rout
 
     @Inject
     lateinit var presenter: P
+
     @Inject
     lateinit var router: R
 

@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Test
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class RoutingHelperTest {
 
@@ -16,7 +17,7 @@ class RoutingHelperTest {
         val fragment: Fragment = mock()
         val fragmentManager: FragmentManager = mock()
 
-        whenever(fragment.fragmentManager).thenReturn(fragmentManager)
+        whenever(fragment.parentFragmentManager).thenReturn(fragmentManager)
 
         RoutingHelper.goBack(fragment)
 
@@ -30,7 +31,7 @@ class RoutingHelperTest {
         val fragmentManager: FragmentManager = mock()
         val fragmentTransaction: FragmentTransaction = mock()
 
-        whenever(fragment.fragmentManager).thenReturn(fragmentManager)
+        whenever(fragment.parentFragmentManager).thenReturn(fragmentManager)
         whenever(fragmentManager.beginTransaction()).thenReturn(fragmentTransaction)
         whenever(fragmentTransaction.setCustomAnimations(any(), any(), any(), any())).thenReturn(fragmentTransaction)
         whenever(fragmentTransaction.replace(any(), any())).thenReturn(fragmentTransaction)
@@ -39,7 +40,7 @@ class RoutingHelperTest {
         RoutingHelper.goToScreen(fragment, newFragment, NEW_FRAGMENT_NAME)
 
         verify(fragmentTransaction).setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_out_right, R.anim.slide_in_left)
-        verify(fragmentTransaction).replace(R.id.fragment_container, newFragment)
+        verify(fragmentTransaction).replace(MainR.id.fragment_container, newFragment)
         verify(fragmentTransaction).addToBackStack(NEW_FRAGMENT_NAME)
         verify(fragmentTransaction).commit()
     }
@@ -58,7 +59,7 @@ class RoutingHelperTest {
         RoutingHelper.goToScreen(fragmentManager, newFragment, NEW_FRAGMENT_NAME)
 
         verify(fragmentTransaction).setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_out_right, R.anim.slide_in_left)
-        verify(fragmentTransaction).replace(R.id.fragment_container, newFragment)
+        verify(fragmentTransaction).replace(MainR.id.fragment_container, newFragment)
         verify(fragmentTransaction).addToBackStack(NEW_FRAGMENT_NAME)
         verify(fragmentTransaction).commit()
     }

@@ -1,7 +1,5 @@
 package com.ewingsa.ohyeah.conversations
 
-import android.R.string.no
-import android.R.string.yes
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -10,6 +8,7 @@ import com.ewingsa.ohyeah.conversations.viewmodels.ConversationViewModel
 import com.ewingsa.ohyeah.conversations.viewmodels.ConversationsScreenViewModel
 import com.ewingsa.ohyeah.viper.ViperContract
 import javax.inject.Inject
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class ConversationsPresenter @Inject constructor(
     private val interactor: ConversationsContract.Interactor
@@ -61,14 +60,14 @@ class ConversationsPresenter @Inject constructor(
             AlertDialog.Builder(it)
                 .setTitle(it.getString(R.string.conversation_delete_topic))
                 .setMessage(it.getString(R.string.conversation_delete_topic_message))
-                .setIcon(R.drawable.ic_ohyeah)
-                .setPositiveButton(yes) { _, whichButton ->
+                .setIcon(MainR.drawable.ic_ohyeah)
+                .setPositiveButton(android.R.string.ok) { _, whichButton ->
                     if (whichButton == -1) {
                         interactor.deleteConversation(senderId)
                         Toast.makeText(it, it.getString(R.string.conversation_deleted), Toast.LENGTH_SHORT).show()
                     }
                 }
-                .setNegativeButton(no, null).show()
+                .setNegativeButton(android.R.string.cancel, null).show()
         }
     }
 

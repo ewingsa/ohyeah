@@ -12,24 +12,28 @@ import io.reactivex.Observable
 @Dao
 interface MessageDao {
 
-    @Query("""
+    @Query(
+        """
         SELECT *, SUM(CASE WHEN read = 0 THEN 1 ELSE 0 END) as unread
         FROM sender
         JOIN message ON senderId = message.sender_id
         WHERE timestamp <= :timestamp
         GROUP BY sender.senderId
         ORDER BY MAX(timestamp) DESC
-        """)
+        """
+    )
     fun getPreviousConversations(timestamp: Long): Observable<List<PreviewSenderMessage>>
 
-    @Query("""
+    @Query(
+        """
         SELECT *, 0 as unread
         FROM sender
         JOIN message ON senderId = message.sender_id
         WHERE timestamp > :timestamp
         GROUP BY sender.senderId
         ORDER BY MIN(timestamp)
-        """)
+        """
+    )
     fun getFutureConversations(timestamp: Long): Observable<List<PreviewSenderMessage>>
 
     @Query("SELECT * FROM sender WHERE senderId = :id")

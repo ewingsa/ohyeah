@@ -4,36 +4,61 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.annotation.VisibleForTesting
 import com.ewingsa.ohyeah.appinjection.Injectable
 import com.ewingsa.ohyeah.helpers.IntentHelper
+import com.ewingsa.ohyeah.setreminder.databinding.FragmentSetReminderBinding
 import com.ewingsa.ohyeah.setreminder.helpers.PermissionHelper
 import com.ewingsa.ohyeah.viper.BaseViperFragment
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_set_reminder.set_reminder_am_pm
-import kotlinx.android.synthetic.main.fragment_set_reminder.set_reminder_hour
-import kotlinx.android.synthetic.main.fragment_set_reminder.set_reminder_minute
 
-class SetReminderFragment : BaseViperFragment<SetReminderContract.Presenter, SetReminderContract.Router>(),
-    SetReminderContract.View, Injectable {
+class SetReminderFragment :
+    BaseViperFragment<SetReminderContract.Presenter, SetReminderContract.Router>(),
+    SetReminderContract.View,
+    Injectable {
 
     private var senderId: Long? = null
     private var messageId: Long? = null
 
-    private var viewDataBinding: ViewDataBinding? = null
+    private var binding: FragmentSetReminderBinding? = null
 
     private var picturePickerCallback: ((Uri) -> Unit)? = null
 
+    private var activityPermissionResultLauncher: ActivityResultLauncher<String>? = null
+    private var activityChooserResultLauncher: ActivityResultLauncher<Intent>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        activityPermissionResultLauncher = registerForActivityResult(RequestPermission()) { isGranted ->
+            if (isGranted) showPicturePicker()
+        }
+        activityChooserResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onPicturePickerResult(result)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_set_reminder, container, false).also {
-            viewDataBinding = DataBindingUtil.bind(it)
-        }
+
+        binding = FragmentSetReminderBinding.inflate(inflater, container, false).apply { lifecycleOwner = viewLifecycleOwner }
+
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 
     override fun getSenderId() = senderId
@@ -41,14 +66,14 @@ class SetReminderFragment : BaseViperFragment<SetReminderContract.Presenter, Set
     override fun getMessageId() = messageId
 
     override fun addExistingReminderViewModel(viewModel: ReminderViewModel) {
-        viewDataBinding?.setVariable(BR.viewModel, viewModel)
-        set_reminder_minute.position = viewModel.minute
-        set_reminder_hour.position = viewModel.hour
-        set_reminder_am_pm.position = viewModel.amPm
+        binding?.setVariable(BR.viewModel, viewModel)
+        binding?.setReminderMinute?.position = viewModel.minute
+        binding?.setReminderHour?.position = viewModel.hour
+        binding?.setReminderAmPm?.position = viewModel.amPm
     }
 
     override fun addNewReminderViewModel(viewModel: ReminderViewModel) {
-        viewDataBinding?.setVariable(BR.viewModel, viewModel)
+        binding?.setVariable(BR.viewModel, viewModel)
     }
 
     override fun showDatePicker(context: Context, listener: DatePickerDialog.OnDateSetListener, year: Int, month: Int, dayOfMonth: Int) {
@@ -60,27 +85,27 @@ class SetReminderFragment : BaseViperFragment<SetReminderContract.Presenter, Set
     }
 
     override fun onExternalStoragePermissionRequired() {
-        PermissionHelper.requestExternalStoragePermission(this)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (PermissionHelper.checkExternalStoragePermissionGranted(requestCode, grantResults)) {
-            showPicturePicker()
+        activityPermissionResultLauncher?.let {
+            PermissionHelper.requestExternalStoragePermission(it) {
+                showPicturePicker()
+            }
         }
     }
 
     override fun showPicturePicker() {
         val selectPictureIntent = IntentHelper.buildSelectPictureIntent()
-        startActivityForResult(Intent.createChooser(selectPictureIntent, getString(R.string.set_reminder_select_photo)), PICK_IMAGE)
+        val picturePickerIntent = Intent.createChooser(selectPictureIntent, getString(R.string.set_reminder_select_photo))
+        activityChooserResultLauncher?.launch(picturePickerIntent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE) {
-            data?.data?.let {
-                picturePickerCallback?.invoke(it)
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun onPicturePickerResult(activityResult: ActivityResult) {
+        activityResult.data?.data?.let {
+            if (SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                activity?.contentResolver?.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
+            binding?.setReminderPicturePreview?.setImageURI(it) // ensures view is updated
+            picturePickerCallback?.invoke(it)
         }
     }
 
@@ -109,7 +134,5 @@ class SetReminderFragment : BaseViperFragment<SetReminderContract.Presenter, Set
                 this.messageId = messageId
             }
         }
-
-        private const val PICK_IMAGE = 2
     }
 }

@@ -12,7 +12,6 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.wheel_component.view.wheel_component_recycler_view
 
 class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
@@ -23,10 +22,13 @@ class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameL
             field = value
             onPositionSet()
         }
+
     @ColorInt
     private var selectedItemColor: Int
+
     @ColorInt
     private var closeItemColor: Int
+
     @ColorInt
     private var normalItemColor: Int
     private var selectedItemTextSize: Float
@@ -54,7 +56,7 @@ class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameL
 
         inflate(ContextThemeWrapper(context, R.style.wheel_item), R.layout.wheel_component, this)
 
-        wheel_component_recycler_view.apply {
+        findViewById<RecyclerView>(R.id.wheel_component_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = WheelAdapter(items, normalItemTextSize)
@@ -71,11 +73,10 @@ class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameL
     }
 
     private fun onPositionSet() {
-        wheel_component_recycler_view?.layoutManager?.scrollToPosition(position)
+        findViewById<RecyclerView>(R.id.wheel_component_recycler_view)?.layoutManager?.scrollToPosition(position)
     }
 
     private fun onScrolled(wheel: RecyclerView) {
-
         val layoutManager = wheel.layoutManager as LinearLayoutManager
         val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition() - 1
         val lastVisiblePosition = layoutManager.findLastVisibleItemPosition() + 1
@@ -87,7 +88,6 @@ class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameL
         centerYOfWheel = (wheelCoordinates.top + wheelCoordinates.bottom) / 2
 
         for (itemPosition in firstVisiblePosition until lastVisiblePosition) {
-
             val itemViewHolderPosition = getItemViewHolderPosition(itemPosition, wheel.childCount)
 
             wheel.getChildAt(itemViewHolderPosition)?.let {

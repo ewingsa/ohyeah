@@ -2,6 +2,7 @@ package com.ewingsa.ohyeah.setreminder
 
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.result.ActivityResult
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -42,14 +43,13 @@ class SetReminderFragmentTest {
 
         setReminderFragment.setPicturePickerCallback(picturePickerCallback)
 
-        setReminderFragment.onActivityResult(PICK_IMAGE, RESULT_CODE, data)
+        setReminderFragment.onPicturePickerResult(ActivityResult(RESULT_CODE, data))
 
         verify(picturePickerCallback).invoke(uri)
     }
 
     private companion object {
         const val MESSAGE_ID = 1L
-        const val PICK_IMAGE = 2
         const val RESULT_CODE = 0
         const val SENDER_ID = 2L
     }

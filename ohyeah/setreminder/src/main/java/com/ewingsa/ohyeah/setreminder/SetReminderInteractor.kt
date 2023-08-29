@@ -16,6 +16,7 @@ import com.ewingsa.ohyeah.receiver.AlarmReceiver
 import com.ewingsa.ohyeah.viper.ViperContract
 import java.util.Calendar
 import javax.inject.Inject
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class SetReminderInteractor @Inject constructor(
     private val repository: SetReminderContract.Repository,
@@ -30,6 +31,7 @@ class SetReminderInteractor @Inject constructor(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var dateHelper = DateHelper
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var intentHelper = IntentHelper
 
@@ -59,7 +61,8 @@ class SetReminderInteractor @Inject constructor(
             senderPicture = sender.photoUri?.let { Uri.parse(it) },
             year = dateHelper.currentDate().third,
             month = dateHelper.currentDate().first,
-            dayOfMonth = dateHelper.currentDate().second)
+            dayOfMonth = dateHelper.currentDate().second
+        )
         this.reminderDataModel = reminderDataModel
         presenter?.addNewReminderData(reminderDataModel)
     }
@@ -80,16 +83,20 @@ class SetReminderInteractor @Inject constructor(
             hour,
             time[4].toInt(),
             amPm,
-            sender.photoUri?.let { Uri.parse(it) })
+            sender.photoUri?.let { Uri.parse(it) }
+        )
         this.reminderDataModel = reminderDataModel
         presenter?.addExistingReminderData(reminderDataModel)
     }
 
     override fun onNewReminder() {
-        val reminderDataModel = this.reminderDataModel ?: ReminderDataModel("", "",
+        val reminderDataModel = this.reminderDataModel ?: ReminderDataModel(
+            "",
+            "",
             year = dateHelper.currentDate().third,
             month = dateHelper.currentDate().first,
-            dayOfMonth = dateHelper.currentDate().second)
+            dayOfMonth = dateHelper.currentDate().second
+        )
         this.reminderDataModel = reminderDataModel // Restore unsaved information
         presenter?.addNewReminderData(reminderDataModel)
     }
@@ -105,7 +112,7 @@ class SetReminderInteractor @Inject constructor(
     override fun onSaveRequest() {
         reminderDataModel?.let {
             if (it.sender.isEmpty()) {
-                it.sender = resources.getString(R.string.app_name)
+                it.sender = resources.getString(MainR.string.app_name)
             }
             it.senderId?.let { senderId ->
                 onSenderSaved(senderId)
@@ -117,8 +124,10 @@ class SetReminderInteractor @Inject constructor(
         repository.saveNewSender(
             Sender(
                 0,
-                reminderDataModel?.sender ?: resources.getString(R.string.app_name),
-                reminderDataModel?.senderPicture?.toString()))
+                reminderDataModel?.sender ?: resources.getString(MainR.string.app_name),
+                reminderDataModel?.senderPicture?.toString()
+            )
+        )
     }
 
     override fun onSenderSaved(senderId: Long) {
@@ -135,7 +144,8 @@ class SetReminderInteractor @Inject constructor(
                 it,
                 message,
                 senderId,
-                timestamp)
+                timestamp
+            )
             repository.updateMessage(updatedMessage)
             updateSender()
         } ?: run {
@@ -143,7 +153,8 @@ class SetReminderInteractor @Inject constructor(
                 0L,
                 message,
                 senderId,
-                timestamp)
+                timestamp
+            )
             repository.saveNewMessage(newMessage)
         }
     }
@@ -201,10 +212,12 @@ class SetReminderInteractor @Inject constructor(
                     DONT_KILL_APP
                 )
             }
-            val pendingIntent = intentHelper.buildPendingIntent(it, AlarmReceiver::class.java, reminderDataModel?.messageId)
 
-            (it.getSystemService(Context.ALARM_SERVICE) as? AlarmManager)
-                ?.set(AlarmManager.RTC_WAKEUP, getSelectedTimeInMillis(), pendingIntent)
+            (it.getSystemService(Context.ALARM_SERVICE) as? AlarmManager)?.let { alarmManager ->
+                intentHelper.buildPendingIntent(it, AlarmReceiver::class.java, reminderDataModel?.messageId)?.let { pendingIntent ->
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, getSelectedTimeInMillis(), pendingIntent)
+                }
+            }
         }
     }
 

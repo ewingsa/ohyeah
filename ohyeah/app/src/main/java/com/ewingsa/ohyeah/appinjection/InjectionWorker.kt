@@ -12,15 +12,15 @@ object InjectionWorker {
     fun onActivityCreated(activity: Activity, dispatchingAndroidInjector: DispatchingAndroidInjector<Any>) {
         (activity as? FragmentActivity)
             ?.supportFragmentManager
-                ?.registerFragmentLifecycleCallbacks(
-                    object : FragmentManager.FragmentLifecycleCallbacks() {
-                        override fun onFragmentPreAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
-                            (fragment as? Injectable)?.let {
-                                dispatchingAndroidInjector.maybeInject(fragment)
-                            }
+            ?.registerFragmentLifecycleCallbacks(
+                object : FragmentManager.FragmentLifecycleCallbacks() {
+                    override fun onFragmentPreAttached(fragmentManager: FragmentManager, fragment: Fragment, context: Context) {
+                        (fragment as? Injectable)?.let {
+                            dispatchingAndroidInjector.maybeInject(fragment)
                         }
-                    },
-                    true
-                )
-        }
+                    }
+                },
+                true
+            )
+    }
 }

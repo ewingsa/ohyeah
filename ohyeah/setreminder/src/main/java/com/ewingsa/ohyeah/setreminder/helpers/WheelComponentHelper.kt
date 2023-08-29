@@ -18,7 +18,6 @@ object WheelComponentHelper {
     private const val HOUR_MINUTE_PATTERN = "HH:mm"
 
     fun getCurrentTimePosition(type: WheelType): Int {
-
         val timeFormat = SimpleDateFormat(HOUR_MINUTE_PATTERN, Locale.getDefault())
         val currentTime: String = timeFormat.format(Date())
         return (Int.MAX_VALUE / 2) + when (type) {

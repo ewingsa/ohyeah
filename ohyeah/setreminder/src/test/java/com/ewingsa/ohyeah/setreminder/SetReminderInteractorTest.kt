@@ -1,5 +1,6 @@
 package com.ewingsa.ohyeah.setreminder
 
+import android.app.AlarmManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -20,6 +21,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class SetReminderInteractorTest {
 
@@ -146,7 +148,7 @@ class SetReminderInteractorTest {
 
     @Test
     fun testOnSaveRequest_new_sender_senderNotSpecified() {
-        whenever(resources.getString(R.string.app_name)).thenReturn(APP_NAME)
+        whenever(resources.getString(MainR.string.app_name)).thenReturn(APP_NAME)
 
         setReminderInteractor.onNewReminder()
 
@@ -170,7 +172,7 @@ class SetReminderInteractorTest {
 
     @Test
     fun testOnNewSender_senderNotSpecified() {
-        whenever(resources.getString(R.string.app_name)).thenReturn(APP_NAME)
+        whenever(resources.getString(MainR.string.app_name)).thenReturn(APP_NAME)
 
         val captor = argumentCaptor<Sender>()
 
@@ -241,6 +243,7 @@ class SetReminderInteractorTest {
         whenever(presenter.getContext()).thenReturn(context)
         whenever(context.packageManager).thenReturn(packageManager)
         whenever(packageManager.getComponentEnabledSetting(any())).thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+        whenever(context.getSystemService(Context.ALARM_SERVICE)).thenReturn(mock<AlarmManager>())
 
         setReminderInteractor.intentHelper = intentHelper
         setReminderInteractor.onReminderLoaded(MESSAGE, SENDER)
@@ -260,6 +263,7 @@ class SetReminderInteractorTest {
         whenever(presenter.getContext()).thenReturn(context)
         whenever(context.packageManager).thenReturn(packageManager)
         whenever(packageManager.getComponentEnabledSetting(any())).thenReturn(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+        whenever(context.getSystemService(Context.ALARM_SERVICE)).thenReturn(mock<AlarmManager>())
 
         setReminderInteractor.intentHelper = intentHelper
         setReminderInteractor.onReminderLoaded(MESSAGE, SENDER)
