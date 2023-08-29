@@ -3,12 +3,10 @@ package com.ewingsa.ohyeah.conversations
 import com.ewingsa.ohyeah.appinjection.qualifiers.IoThreadScheduler
 import com.ewingsa.ohyeah.appinjection.qualifiers.MainThreadScheduler
 import com.ewingsa.ohyeah.database.MessageDao
-import com.ewingsa.ohyeah.database.PreviewSenderMessage
 import com.ewingsa.ohyeah.viper.ViperContract
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
@@ -33,12 +31,11 @@ class ConversationsRepository @Inject constructor(
      */
     override fun fetchConversations(timestamp: Long) {
         Observable.zip(
-                messageDao.getPreviousConversations(timestamp),
-                messageDao.getFutureConversations(timestamp),
-                BiFunction<List<PreviewSenderMessage>, List<PreviewSenderMessage>, List<PreviewSenderMessage>> {
-                        previous, future -> (previous + future).distinctBy { it.sender.senderId }
-                }
-            )
+            messageDao.getPreviousConversations(timestamp),
+            messageDao.getFutureConversations(timestamp)
+        ) { previous, future ->
+            (previous + future).distinctBy { it.sender.senderId }
+        }
             .subscribeOn(ioThreadScheduler)
             .observeOn(mainThreadScheduler)
             .subscribe(

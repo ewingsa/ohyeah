@@ -184,15 +184,6 @@ class ReminderViewModelTest {
         verify(interactions).onSavePress(reminderViewModel.message, reminderViewModel.sender)
     }
 
-    @Test
-    fun testOnDateChosen() {
-        reminderViewModel.onDateChosen(NEW_YEAR, NEW_MONTH, NEW_DAY)
-
-        assertEquals(NEW_YEAR, reminderViewModel.reminderDataModel.year)
-        assertEquals(NEW_MONTH, reminderViewModel.reminderDataModel.month)
-        assertEquals(NEW_DAY, reminderViewModel.reminderDataModel.dayOfMonth)
-    }
-
     private companion object {
         const val AM = "A.M."
         const val AM_PM = AM_VALUE
@@ -203,12 +194,9 @@ class ReminderViewModelTest {
         const val MINUTE = 5
         const val MONTH = 3
         const val NEW_HOUR = "2"
-        const val NEW_DAY = 18
         const val NEW_MESSAGE = "new message"
         const val NEW_MINUTE = "6"
-        const val NEW_MONTH = 4
         const val NEW_SENDER = "new sender"
-        const val NEW_YEAR = 2021
         const val PM = "P.M."
         const val SENDER = "sender"
         const val SENDER_ID = 2L

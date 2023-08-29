@@ -24,13 +24,19 @@
 
             <ImageButton
                 android:id="@+id/set_reminder_back_button"
-                android:layout_width="@dimen/s24dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/s48dp"
+                android:layout_height="@dimen/s48dp"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_margin="@dimen/s16dp"
-                android:background="@drawable/back_button"
-                android:contentDescription="@string/back_button"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/s8dp"
+                android:layout_marginLeft="@dimen/s8dp"
+                android:padding="@dimen/s12sp"
+                android:src="@drawable/back_button"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/back"
                 android:onClick="@{viewModel.onBackPress}" />
 
             <Space
@@ -46,9 +52,13 @@
                 android:id="@+id/set_reminder_delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="@dimen/s48dp"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/s16dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="@dimen/s16dp"
+                android:layout_marginRight="@dimen/s16dp"
                 android:text="@string/set_reminder_delete"
                 android:textStyle="bold"
                 android:background="@android:color/transparent"
@@ -77,24 +87,28 @@
                     android:id="@+id/set_reminder_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/s48dp"
                     android:layout_marginTop="@dimen/s8dp"
                     android:hint="@string/set_reminder_message"
                     android:importantForAutofill="no"
                     android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
                     android:maxLines="3"
-                    android:text="@={viewModel.message}" />
+                    android:text="@={viewModel.message}"
+                    tools:ignore="VisualLintTextFieldSize" />
 
                 <EditText
                     android:id="@+id/set_reminder_sender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/s48dp"
                     android:layout_marginTop="@dimen/s16dp"
                     android:hint="@string/set_reminder_topic"
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:inputType="textCapWords|textAutoCorrect"
                     android:maxLines="1"
-                    android:text="@={viewModel.sender}" />
+                    android:text="@={viewModel.sender}"
+                    tools:ignore="VisualLintTextFieldSize" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -111,7 +125,8 @@
                         android:textColor="@color/color_accent"
                         android:textStyle="bold"
                         android:background="@android:color/transparent"
-                        android:onClick="@{viewModel.onDatePress}" />
+                        android:onClick="@{viewModel.onDatePress}"
+                        tools:ignore="VisualLintButtonSize" />
 
                     <TextView
                         android:id="@+id/set_reminder_date_text"
@@ -196,7 +211,8 @@
                         android:textColor="@color/color_accent"
                         android:textStyle="bold"
                         android:background="@android:color/transparent"
-                        android:onClick="@{viewModel.onSelectPhotoPress}" />
+                        android:onClick="@{viewModel.onSelectPhotoPress}"
+                        tools:ignore="VisualLintButtonSize" />
 
                     <TextView
                         android:id="@+id/set_reminder_picture_prompt"
@@ -241,7 +257,8 @@
                     android:textColor="@color/color_accent"
                     android:textSize="20sp"
                     android:background="@android:color/transparent"
-                    android:onClick="@{viewModel.onSavePress}" />
+                    android:onClick="@{viewModel.onSavePress}"
+                    tools:ignore="VisualLintButtonSize" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

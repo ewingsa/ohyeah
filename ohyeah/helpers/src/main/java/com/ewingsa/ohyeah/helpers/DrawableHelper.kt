@@ -89,12 +89,17 @@ object DrawableHelper {
         }
     }
 
-    private fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
+    private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(angle)
         return Bitmap.createBitmap(
-            source, 0, 0, source.width, source.height,
-            matrix, true
+            source,
+            0,
+            0,
+            source.width,
+            source.height,
+            matrix,
+            true
         )
     }
 }

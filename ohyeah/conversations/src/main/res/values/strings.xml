@@ -7,4 +7,6 @@
     <string name="conversation_image">The topic\'s accompanying image</string>
     <string name="conversation_nine_plus">9+</string>
     <string name="conversation_no_reminders">No reminders set</string>
+    <string name="conversation_info">Info</string>
+    <string name="conversation_new">New</string>
 </resources>

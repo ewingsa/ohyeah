@@ -20,6 +20,7 @@ class MessagesInteractor @Inject constructor(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var drawableHelper = DrawableHelper
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     var dateHelper = DateHelper
 
@@ -84,7 +85,8 @@ class MessagesInteractor @Inject constructor(
                             currentMessage.message.messageId,
                             currentMessage.message.message,
                             dateHelper.formatTime(currentMessage.message.timestamp),
-                            bitmap)
+                            bitmap
+                        )
                     )
                     index++
                 }

@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply from: '../ktlint.gradle'
 
 android {
-    dataBinding {
-        enabled = true
+    namespace = "com.ewingsa.ohyeah.setreminder"
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -25,6 +27,7 @@ dependencies {
     implementation project(':helpers')
     implementation project(':injection')
     implementation project(':receiver')
+    implementation project(':resources')
     implementation project(':routing')
     implementation project(':viper')
     implementation project(':wheelcomponent')

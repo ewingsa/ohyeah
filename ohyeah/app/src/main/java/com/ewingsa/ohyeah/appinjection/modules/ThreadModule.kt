@@ -17,13 +17,11 @@ abstract class ThreadModule {
         @PerApplication
         @MainThreadScheduler
         @Provides
-        @JvmStatic
         fun provideMainThreadScheduler(): Scheduler = AndroidSchedulers.mainThread()
 
         @PerApplication
         @IoThreadScheduler
         @Provides
-        @JvmStatic
         fun provideIoThreadScheduler(): Scheduler = Schedulers.io()
     }
 }

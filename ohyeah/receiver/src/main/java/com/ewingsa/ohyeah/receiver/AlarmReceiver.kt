@@ -18,9 +18,11 @@ class AlarmReceiver : BroadcastReceiver() {
 
     @Inject
     lateinit var messageDao: MessageDao
+
     @Inject
     @MainThreadScheduler
     lateinit var mainThreadScheduler: Scheduler
+
     @Inject
     @IoThreadScheduler
     lateinit var ioThreadScheduler: Scheduler

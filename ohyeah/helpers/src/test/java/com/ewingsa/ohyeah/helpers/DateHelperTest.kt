@@ -1,9 +1,9 @@
 package com.ewingsa.ohyeah.helpers
 
-import java.util.TimeZone
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.util.TimeZone
 
 class DateHelperTest {
 

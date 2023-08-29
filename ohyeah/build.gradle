@@ -6,12 +6,11 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
         classpath "$deps.gradle"
-        classpath "$deps.gradle_bintray"
         classpath "$deps.kotlin_gradle_plugin"
         classpath "$deps.licenses"
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,7 +21,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -30,18 +29,23 @@ subprojects {
     afterEvaluate { project ->
         if (project.hasProperty('android')) {
             android {
-                compileSdkVersion 29
-                buildToolsVersion '29.0.3'
+                compileSdkVersion 34
+                buildToolsVersion '34.0.0'
 
                 defaultConfig {
                     minSdkVersion 14
-                    targetSdkVersion 29
-                    versionCode 1
-                    versionName '0.1'
+                    targetSdkVersion 34
+                    versionCode 2
+                    versionName '0.2'
                     testInstrumentationRunner "$deps.android_junit_runner"
                     consumerProguardFiles 'consumer-rules.pro'
                     multiDexEnabled true
                     vectorDrawables.useSupportLibrary = true
+                }
+
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
                 }
 
                 buildTypes {
@@ -61,8 +65,4 @@ afterEvaluate { project ->
             tasks."license${it.name.capitalize()}Report"
         }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

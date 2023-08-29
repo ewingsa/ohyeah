@@ -1,11 +1,15 @@
 package com.ewingsa.ohyeah
 
+import android.Manifest.permission.POST_NOTIFICATIONS
 import android.content.Context
 import android.content.Intent.makeRestartActivityTask
 import android.net.Uri
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.appcompat.app.AppCompatActivity
 import com.ewingsa.ohyeah.appinjection.Injectable
 import com.ewingsa.ohyeah.appinjection.InjectionWorker
@@ -16,6 +20,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
+import com.ewingsa.ohyeah.resources.R as MainR
 
 class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInjector, Injectable {
 
@@ -31,15 +36,17 @@ class MainActivity @Inject constructor() : AppCompatActivity(), HasAndroidInject
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.content_main)
+        setContentView(MainR.layout.content_main)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, ConversationsFragment.newInstance())
+            .add(MainR.id.fragment_container, ConversationsFragment.newInstance())
             .commit()
 
         intent?.data?.let {
             DeeplinkResolver.handleMessagesDeeplink(it, supportFragmentManager)
         }
+
+        if (SDK_INT >= TIRAMISU) registerForActivityResult(RequestPermission()) {}.launch(POST_NOTIFICATIONS)
 
         INITIALIZED = true
     }
