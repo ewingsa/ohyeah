@@ -152,7 +152,7 @@ class SetReminderPresenterTest {
     fun testOnSavePress_messageFilled() {
         whenever(view.getContext()).thenReturn(mock())
 
-        setReminderPresenter.onSavePress(MESSAGE, SENDER)
+        setReminderPresenter.onSavePress(MESSAGE)
 
         verify(interactor).onSaveRequest()
     }
@@ -161,7 +161,7 @@ class SetReminderPresenterTest {
     fun testOnSavePress_messageEmpty() {
         whenever(view.getContext()).thenReturn(mock())
 
-        setReminderPresenter.onSavePress("", SENDER)
+        setReminderPresenter.onSavePress("")
 
         verify(view).showNeedsMessage()
     }

@@ -2,6 +2,7 @@ package com.ewingsa.ohyeah.setreminder.helpers
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build.VERSION.SDK_INT
@@ -16,18 +17,24 @@ object PermissionHelper {
         return if (SDK_INT < JELLY_BEAN) {
             true
         } else {
-            context?.let {
-                val permission = if (SDK_INT < TIRAMISU) READ_EXTERNAL_STORAGE else READ_MEDIA_IMAGES
-                val permissionCheck = ContextCompat.checkSelfPermission(it, permission)
-                permissionCheck == PERMISSION_GRANTED
+            context?.let { nonNullContext ->
+                when {
+                    SDK_INT > TIRAMISU -> listOf(READ_MEDIA_IMAGES, READ_MEDIA_VISUAL_USER_SELECTED)
+                    SDK_INT == TIRAMISU -> listOf(READ_MEDIA_IMAGES)
+                    else -> listOf(READ_EXTERNAL_STORAGE)
+                }.all { ContextCompat.checkSelfPermission(nonNullContext, it) == PERMISSION_GRANTED }
             } ?: false
         }
     }
 
-    fun requestExternalStoragePermission(activityResultLauncher: ActivityResultLauncher<String>, callback: () -> Unit) {
+    fun requestExternalStoragePermission(activityResultLauncher: ActivityResultLauncher<Array<String>>, callback: () -> Unit) {
         if (SDK_INT >= JELLY_BEAN) {
-            val permission = if (SDK_INT < TIRAMISU) READ_EXTERNAL_STORAGE else READ_MEDIA_IMAGES
-            activityResultLauncher.launch(permission)
+            val permissions = when {
+                SDK_INT > TIRAMISU -> arrayOf(READ_MEDIA_IMAGES, READ_MEDIA_VISUAL_USER_SELECTED)
+                SDK_INT == TIRAMISU -> arrayOf(READ_MEDIA_IMAGES)
+                else -> arrayOf(READ_EXTERNAL_STORAGE)
+            }
+            activityResultLauncher.launch(permissions)
         } else {
             callback()
         }

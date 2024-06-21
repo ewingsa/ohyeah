@@ -84,7 +84,7 @@ class SetReminderPresenter @Inject constructor(
         }
     }
 
-    override fun onSavePress(message: String, sender: String) {
+    override fun onSavePress(message: String) {
         if (message.isNotEmpty()) {
             view?.getContext()?.let {
                 interactor.onSaveRequest()

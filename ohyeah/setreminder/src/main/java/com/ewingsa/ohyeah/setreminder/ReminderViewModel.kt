@@ -90,7 +90,7 @@ class ReminderViewModel(
 
     val onSelectPhotoPress = View.OnClickListener { interactions.onSelectPhotoPress(this) }
 
-    val onSavePress = View.OnClickListener { interactions.onSavePress(message, sender) }
+    val onSavePress = View.OnClickListener { interactions.onSavePress(message) }
 
     fun onDateChosen(year: Int, month: Int, dayOfMonth: Int) {
         reminderDataModel.apply {
@@ -106,7 +106,7 @@ class ReminderViewModel(
         fun onDeletePress()
         fun onDatePress(reminderViewModel: ReminderViewModel)
         fun onSelectPhotoPress(reminderViewModel: ReminderViewModel)
-        fun onSavePress(message: String, sender: String)
+        fun onSavePress(message: String)
     }
 
     private companion object {
