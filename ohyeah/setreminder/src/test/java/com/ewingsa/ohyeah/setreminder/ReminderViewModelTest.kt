@@ -181,7 +181,7 @@ class ReminderViewModelTest {
     fun testOnSavePress() {
         reminderViewModel.onSavePress.onClick(mock())
 
-        verify(interactions).onSavePress(reminderViewModel.message, reminderViewModel.sender)
+        verify(interactions).onSavePress(reminderViewModel.message)
     }
 
     private companion object {

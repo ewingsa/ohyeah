@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class WheelComponent constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class WheelComponent(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
 
     private var items: MutableList<CharSequence> = mutableListOf(DEFAULT_ITEM)
     var listener: SelectedItemListener? = null

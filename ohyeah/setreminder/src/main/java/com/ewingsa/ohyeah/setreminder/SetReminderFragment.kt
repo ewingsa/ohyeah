@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.annotation.VisibleForTesting
 import com.ewingsa.ohyeah.appinjection.Injectable
 import com.ewingsa.ohyeah.helpers.IntentHelper
@@ -34,14 +33,14 @@ class SetReminderFragment :
 
     private var picturePickerCallback: ((Uri) -> Unit)? = null
 
-    private var activityPermissionResultLauncher: ActivityResultLauncher<String>? = null
+    private var activityPermissionResultLauncher: ActivityResultLauncher<Array<String>>? = null
     private var activityChooserResultLauncher: ActivityResultLauncher<Intent>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityPermissionResultLauncher = registerForActivityResult(RequestPermission()) { isGranted ->
-            if (isGranted) showPicturePicker()
+        activityPermissionResultLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            if (map.values.all { it }) showPicturePicker()
         }
         activityChooserResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             onPicturePickerResult(result)
