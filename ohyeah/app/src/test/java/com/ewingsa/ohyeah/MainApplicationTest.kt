@@ -1,9 +1,9 @@
 package com.ewingsa.ohyeah
 
-import com.nhaarman.mockitokotlin2.mock
 import dagger.android.DispatchingAndroidInjector
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.mockito.kotlin.mock
 
 class MainApplicationTest {
 

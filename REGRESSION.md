@@ -46,10 +46,8 @@ should display 12 for the hour and "A.M" for the meridiem.
 - [ ] Change the system time to be noon/12PM. Click the
 "New Reminder" button on the Home Screen. The time picker
 should display 12 for the hour and "P.M" for the meridiem.
-- [ ] Press the "Select Photo" button. Deny permission.
-Nothing should happen.
-- [ ] Press the "Select Photo" button. Allow permission. Add a
-photo. Confirm that it is displayed on the screen.
+- [ ] Press the "Select Photo" button. Add a photo.
+Confirm that it is displayed on the screen.
 - [ ] Write a message that is at least 3 lines of text. Nothing
 unexpected should happen, especially with the time wheels.
 - [ ] Add Message, "Message", Topic, "Topic", set the time to a
@@ -71,13 +69,13 @@ message provided, and with the Topic "Oh Yeah!".
 at the top, with "Oh Yeah!" below. The photo for "Oh Yeah!" should
 be the app logo, and the photo for "Topic" should be the one
 selected above.
-- [ ] Add a reminder with Message "Future message", Topic "Topic",
-and set its date to be in the future. Save. Add a reminder with
-Message "Future topic", Topic "Future Topic", and set its date to be
-in the future. Save. On the home screen, the order of conversations
-from top to bottom should be "Topic", with preview message "Message"
-(not "Future message"), then "Oh Yeah!", then a label that
-says "Future Topics:", then "Future Topic".
+- [ ] Add a reminder with Message "Future message", Topic
+"Future Topic", and set its date to be in the future. Save. Add a 
+reminder with Message "Future message", Topic "Future Topic", and set
+its date to be in the future. Save. On the home screen, the order of
+conversations from top to bottom should be "Topic", with preview
+message "Message" (not "Future message"), then "Oh Yeah!", then a
+label that says "Future Topics:", then "Future Topic".
 - [ ] Long press the "Future Topic" topic. A prompt to delete should
 appear. Press "cancel". Nothing should happen.
 - [ ] Long press the "Future Topic" topic. A prompt to delete should
@@ -87,8 +85,7 @@ appear. Press "ok". The topic should be deleted.
 
 - [ ] Click the "Topic" conversation in the home screen. The
 "Message" message should appear at the top, under a label
-corresponding to its date. Then the "Future message"'s date should
-be below, followed by the "Future message".
+corresponding to its date.
 - [ ] Rotate the device. The app should not rotate nor crash.
 - [ ] All dates and times should correspond to what they were when
 set.

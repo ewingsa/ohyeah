@@ -4,16 +4,16 @@ import android.content.Context
 import com.ewingsa.ohyeah.conversations.datamodels.ConversationDataModel
 import com.ewingsa.ohyeah.conversations.datamodels.UpcomingLabelDataModel
 import com.ewingsa.ohyeah.conversations.viewmodels.ConversationViewModel
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class ConversationsPresenterTest {
 

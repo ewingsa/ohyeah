@@ -1,11 +1,5 @@
 package com.ewingsa.ohyeah.setreminder
 
-import android.content.Intent
-import android.net.Uri
-import androidx.activity.result.ActivityResult
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -33,24 +27,8 @@ class SetReminderFragmentTest {
         assertEquals(MESSAGE_ID, setReminderFragment.getMessageId())
     }
 
-    @Test
-    fun testOnActivityResult() {
-        val picturePickerCallback: (Uri) -> Unit = mock()
-        val data: Intent = mock()
-        val uri: Uri = mock()
-
-        whenever(data.data).thenReturn(uri)
-
-        setReminderFragment.setPicturePickerCallback(picturePickerCallback)
-
-        setReminderFragment.onPicturePickerResult(ActivityResult(RESULT_CODE, data))
-
-        verify(picturePickerCallback).invoke(uri)
-    }
-
     private companion object {
         const val MESSAGE_ID = 1L
-        const val RESULT_CODE = 0
         const val SENDER_ID = 2L
     }
 }

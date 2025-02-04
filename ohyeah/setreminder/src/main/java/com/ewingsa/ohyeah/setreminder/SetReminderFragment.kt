@@ -2,22 +2,17 @@ package com.ewingsa.ohyeah.setreminder
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.VisibleForTesting
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import com.ewingsa.ohyeah.appinjection.Injectable
-import com.ewingsa.ohyeah.helpers.IntentHelper
+import com.ewingsa.ohyeah.helpers.DrawableHelper
 import com.ewingsa.ohyeah.setreminder.databinding.FragmentSetReminderBinding
-import com.ewingsa.ohyeah.setreminder.helpers.PermissionHelper
 import com.ewingsa.ohyeah.viper.BaseViperFragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,17 +28,16 @@ class SetReminderFragment :
 
     private var picturePickerCallback: ((Uri) -> Unit)? = null
 
-    private var activityPermissionResultLauncher: ActivityResultLauncher<Array<String>>? = null
-    private var activityChooserResultLauncher: ActivityResultLauncher<Intent>? = null
+    private var picturePickerLauncher: ActivityResultLauncher<PickVisualMediaRequest>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityPermissionResultLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
-            if (map.values.all { it }) showPicturePicker()
-        }
-        activityChooserResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            onPicturePickerResult(result)
+        picturePickerLauncher = registerForActivityResult(PickVisualMedia()) { uri ->
+            uri?.let {
+                picturePickerCallback?.invoke(it)
+                binding?.setReminderPicturePreview?.setImageURI(it) // ensures view is updated
+            }
         }
     }
 
@@ -69,10 +63,18 @@ class SetReminderFragment :
         binding?.setReminderMinute?.position = viewModel.minute
         binding?.setReminderHour?.position = viewModel.hour
         binding?.setReminderAmPm?.position = viewModel.amPm
+        setSenderPicture(viewModel.senderPicture.toString())
     }
 
     override fun addNewReminderViewModel(viewModel: ReminderViewModel) {
         binding?.setVariable(BR.viewModel, viewModel)
+        setSenderPicture(viewModel.senderPicture.toString())
+    }
+
+    private fun setSenderPicture(uri: String) {
+        DrawableHelper.getSmallBitmap(uri, context)?.let {
+            binding?.setReminderPicturePreview?.setImageBitmap(it)
+        }
     }
 
     override fun showDatePicker(context: Context, listener: DatePickerDialog.OnDateSetListener, year: Int, month: Int, dayOfMonth: Int) {
@@ -83,29 +85,8 @@ class SetReminderFragment :
         picturePickerCallback = listener
     }
 
-    override fun onExternalStoragePermissionRequired() {
-        activityPermissionResultLauncher?.let {
-            PermissionHelper.requestExternalStoragePermission(it) {
-                showPicturePicker()
-            }
-        }
-    }
-
     override fun showPicturePicker() {
-        val selectPictureIntent = IntentHelper.buildSelectPictureIntent()
-        val picturePickerIntent = Intent.createChooser(selectPictureIntent, getString(R.string.set_reminder_select_photo))
-        activityChooserResultLauncher?.launch(picturePickerIntent)
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun onPicturePickerResult(activityResult: ActivityResult) {
-        activityResult.data?.data?.let {
-            if (SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                activity?.contentResolver?.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            }
-            binding?.setReminderPicturePreview?.setImageURI(it) // ensures view is updated
-            picturePickerCallback?.invoke(it)
-        }
+        picturePickerLauncher?.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
     }
 
     override fun showNeedsMessage() {

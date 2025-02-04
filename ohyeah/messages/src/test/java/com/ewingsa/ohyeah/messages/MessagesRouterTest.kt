@@ -2,14 +2,14 @@ package com.ewingsa.ohyeah.messages
 
 import com.ewingsa.ohyeah.routing.RoutingHelper
 import com.ewingsa.ohyeah.setreminder.SetReminderFragment
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.isNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.isNull
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class MessagesRouterTest {
 

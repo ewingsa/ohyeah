@@ -2,17 +2,16 @@ package com.ewingsa.ohyeah.setreminder
 
 import android.content.Context
 import android.content.res.Resources
-import com.ewingsa.ohyeah.setreminder.helpers.PermissionHelper
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class SetReminderPresenterTest {
 
@@ -116,36 +115,6 @@ class SetReminderPresenterTest {
         setReminderPresenter.onDatePress(reminderViewModel)
 
         verify(view).showDatePicker(eq(context), any(), eq(YEAR), eq(MONTH), eq(DAY))
-    }
-
-    @Test
-    fun testOnSelectPhotoPress_needsPermission() {
-        val permissionHelper: PermissionHelper = mock()
-
-        setReminderPresenter.permissionHelper = permissionHelper
-
-        whenever(view.getContext()).thenReturn(mock())
-        whenever(permissionHelper.hasExternalStoragePermission(any())).thenReturn(false)
-
-        setReminderPresenter.onSelectPhotoPress(mock())
-
-        verify(view).setPicturePickerCallback(any())
-        verify(view).onExternalStoragePermissionRequired()
-    }
-
-    @Test
-    fun testOnSelectPhotoPress_doesNotNeedPermission() {
-        val permissionHelper: PermissionHelper = mock()
-
-        setReminderPresenter.permissionHelper = permissionHelper
-
-        whenever(view.getContext()).thenReturn(mock())
-        whenever(permissionHelper.hasExternalStoragePermission(any())).thenReturn(true)
-
-        setReminderPresenter.onSelectPhotoPress(mock())
-
-        verify(view).setPicturePickerCallback(any())
-        verify(view).showPicturePicker()
     }
 
     @Test

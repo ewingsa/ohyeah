@@ -44,9 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/set_reminder_back_button"
-                android:layout_toRightOf="@id/set_reminder_back_button"
-                android:layout_toStartOf="@id/set_reminder_delete_button"
-                android:layout_toLeftOf="@id/set_reminder_delete_button" />
+                android:layout_toStartOf="@id/set_reminder_delete_button" />
 
             <Button
                 android:id="@+id/set_reminder_delete_button"
@@ -235,7 +233,6 @@
                             android:adjustViewBounds="true"
                             android:maxHeight="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@{viewModel.senderPicture}"
                             android:contentDescription="@string/set_reminder_photo_preview" />
                     </FrameLayout>
                 </LinearLayout>

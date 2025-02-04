@@ -1,9 +1,9 @@
 package com.ewingsa.ohyeah.viper
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class BaseViperFragmentTest {
 

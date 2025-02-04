@@ -1,7 +1,5 @@
 package com.ewingsa.ohyeah.setreminder
 
-import android.net.Uri
-
 class ReminderDataModel(
     var message: String,
     var sender: String,
@@ -13,5 +11,5 @@ class ReminderDataModel(
     var hour: Int = -1, // Saved as 24 hour clock
     var minute: Int = -1,
     var amPm: Int = -1,
-    var senderPicture: Uri? = null
+    var senderPicture: String? = null
 )

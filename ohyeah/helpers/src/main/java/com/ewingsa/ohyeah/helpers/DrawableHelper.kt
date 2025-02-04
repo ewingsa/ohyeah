@@ -1,6 +1,8 @@
 package com.ewingsa.ohyeah.helpers
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.ContextWrapper
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -19,6 +21,21 @@ object DrawableHelper {
 
     private val PIXELS_IN_SMALL_IMAGE: Float by lazy { 100F * (Resources.getSystem()?.displayMetrics?.density ?: 1F) }
 
+    fun saveImage(uri: Uri, context: Context?): String {
+        val destination = "${uri.pathSegments?.last() ?: ""}.png"
+
+        try {
+            val contextWrapper = ContextWrapper(context)
+            val inputStream = contextWrapper.contentResolver?.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            inputStream?.close()
+            val fileOutput = contextWrapper.openFileOutput(destination, MODE_PRIVATE)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutput)
+            fileOutput.close()
+        } catch (_: Exception) { }
+        return destination
+    }
+
     /**
      * @return A bitmap with its longest dimension no more than 100 dp
      */
@@ -32,10 +49,10 @@ object DrawableHelper {
 
     private fun uriToSmallBitmap(uri: String, context: Context): Bitmap? {
         return try {
-            val parsedUri = Uri.parse(uri)
             BitmapFactory.Options().run {
                 inJustDecodeBounds = true
-                val imageDimensionInputStream = context.contentResolver.openInputStream(parsedUri)
+                val contextWrapper = ContextWrapper(context)
+                val imageDimensionInputStream = contextWrapper.openFileInput(uri)
                 BitmapFactory.decodeStream(imageDimensionInputStream, null, this)
                 imageDimensionInputStream?.close()
 
@@ -43,7 +60,7 @@ object DrawableHelper {
 
                 inJustDecodeBounds = false
 
-                val inputStream = context.contentResolver.openInputStream(parsedUri)
+                val inputStream = contextWrapper.openFileInput(uri)
                 val bitmap = BitmapFactory.decodeStream(inputStream, Rect(), this)
                 return fixOrientation(inputStream, bitmap).also {
                     inputStream?.close()
