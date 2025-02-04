@@ -3,16 +3,16 @@ package com.ewingsa.ohyeah.setreminder
 import com.ewingsa.ohyeah.database.Message
 import com.ewingsa.ohyeah.database.MessageDao
 import com.ewingsa.ohyeah.database.Sender
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers.trampoline
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class SetReminderRepositoryTest {
 

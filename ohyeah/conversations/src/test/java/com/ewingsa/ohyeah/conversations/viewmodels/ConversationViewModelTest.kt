@@ -1,10 +1,10 @@
 package com.ewingsa.ohyeah.conversations.viewmodels
 
 import com.ewingsa.ohyeah.conversations.datamodels.ConversationDataModel
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class ConversationViewModelTest {
 

@@ -3,14 +3,11 @@ package com.ewingsa.ohyeah.helpers
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.KITKAT
 
 object IntentHelper {
 
     const val MESSAGE_ID = "message_id"
 
-    private const val IMAGE_RESOURCE_TYPE = "image/*"
     private const val REQUEST_CODE = 0
 
     fun buildPendingIntent(context: Context, receiverClass: Class<out Any>, messageId: Long?): PendingIntent? {
@@ -26,13 +23,5 @@ object IntentHelper {
 
     fun deletePendingIntent(context: Context, receiverClass: Class<out Any>, messageId: Long?) {
         buildPendingIntent(context, receiverClass, messageId)?.cancel()
-    }
-
-    fun buildSelectPictureIntent(): Intent {
-        val intent = Intent()
-        intent.type = IMAGE_RESOURCE_TYPE
-        val action = if (SDK_INT >= KITKAT) { Intent.ACTION_OPEN_DOCUMENT } else { Intent.ACTION_GET_CONTENT }
-        intent.action = action
-        return intent
     }
 }

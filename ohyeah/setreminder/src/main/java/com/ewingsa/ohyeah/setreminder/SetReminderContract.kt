@@ -17,7 +17,6 @@ interface SetReminderContract {
         fun getContext(): Context?
         fun showDatePicker(context: Context, listener: DatePickerDialog.OnDateSetListener, year: Int, month: Int, dayOfMonth: Int)
         fun setPicturePickerCallback(listener: (Uri) -> Unit)
-        fun onExternalStoragePermissionRequired()
         fun showPicturePicker()
         fun showNeedsMessage()
         fun showUpdatedMessage()

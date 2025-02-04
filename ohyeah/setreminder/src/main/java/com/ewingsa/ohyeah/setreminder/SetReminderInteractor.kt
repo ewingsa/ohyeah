@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 import android.content.pm.PackageManager.DONT_KILL_APP
 import android.content.res.Resources
-import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import com.ewingsa.ohyeah.database.Message
 import com.ewingsa.ohyeah.database.Sender
@@ -58,7 +57,7 @@ class SetReminderInteractor @Inject constructor(
             "",
             sender.name,
             senderId = sender.senderId,
-            senderPicture = sender.photoUri?.let { Uri.parse(it) },
+            senderPicture = sender.photoUri,
             year = dateHelper.currentDate().third,
             month = dateHelper.currentDate().first,
             dayOfMonth = dateHelper.currentDate().second
@@ -83,7 +82,7 @@ class SetReminderInteractor @Inject constructor(
             hour,
             time[4].toInt(),
             amPm,
-            sender.photoUri?.let { Uri.parse(it) }
+            sender.photoUri
         )
         this.reminderDataModel = reminderDataModel
         presenter?.addExistingReminderData(reminderDataModel)

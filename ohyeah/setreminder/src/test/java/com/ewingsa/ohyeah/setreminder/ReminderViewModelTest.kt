@@ -4,12 +4,12 @@ import android.net.Uri
 import com.ewingsa.ohyeah.setreminder.SetReminderInteractor.Companion.AM_VALUE
 import com.ewingsa.ohyeah.setreminder.SetReminderInteractor.Companion.PM_VALUE
 import com.ewingsa.ohyeah.setreminder.helpers.WheelComponentHelper
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class ReminderViewModelTest {
 

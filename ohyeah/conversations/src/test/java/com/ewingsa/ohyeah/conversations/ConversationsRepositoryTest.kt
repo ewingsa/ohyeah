@@ -4,15 +4,15 @@ import com.ewingsa.ohyeah.database.Message
 import com.ewingsa.ohyeah.database.MessageDao
 import com.ewingsa.ohyeah.database.PreviewSenderMessage
 import com.ewingsa.ohyeah.database.Sender
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers.trampoline
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class ConversationsRepositoryTest {
 

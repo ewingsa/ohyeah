@@ -1,8 +1,8 @@
 package com.ewingsa.ohyeah.conversations
 
-import com.nhaarman.mockitokotlin2.mock
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.mockito.kotlin.mock
 
 class ConversationsAdapterTest {
 

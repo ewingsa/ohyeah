@@ -3,9 +3,8 @@ package com.ewingsa.ohyeah.setreminder
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.Resources
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
-import com.ewingsa.ohyeah.setreminder.helpers.PermissionHelper
+import com.ewingsa.ohyeah.helpers.DrawableHelper
 import com.ewingsa.ohyeah.viper.ViperContract
 import javax.inject.Inject
 import com.ewingsa.ohyeah.resources.R as MainR
@@ -16,9 +15,6 @@ class SetReminderPresenter @Inject constructor(
 ) : SetReminderContract.Presenter, ReminderViewModel.Interactions {
 
     private var view: SetReminderContract.View? = null
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    var permissionHelper = PermissionHelper
 
     init {
         interactor.setPresenter(this)
@@ -76,12 +72,10 @@ class SetReminderPresenter @Inject constructor(
     }
 
     override fun onSelectPhotoPress(reminderViewModel: ReminderViewModel) {
-        view?.setPicturePickerCallback { senderPicture -> reminderViewModel.senderPicture = senderPicture }
-        if (!permissionHelper.hasExternalStoragePermission(view?.getContext())) {
-            view?.onExternalStoragePermissionRequired()
-        } else {
-            view?.showPicturePicker()
+        view?.setPicturePickerCallback { senderPicture ->
+            reminderViewModel.senderPicture = DrawableHelper.saveImage(senderPicture, getContext())
         }
+        view?.showPicturePicker()
     }
 
     override fun onSavePress(message: String) {

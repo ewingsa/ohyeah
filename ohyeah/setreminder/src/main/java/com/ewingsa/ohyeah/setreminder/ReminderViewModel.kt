@@ -41,7 +41,6 @@ class ReminderViewModel(
             notifyPropertyChanged(BR.date)
         }
 
-    @Bindable
     var senderPicture = reminderDataModel.senderPicture
         set(value) {
             field = value

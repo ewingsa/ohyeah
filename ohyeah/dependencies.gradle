@@ -5,8 +5,8 @@ ext.deps = [
         kotlin_gradle_plugin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
         licenses                 : "com.jaredsburrows:gradle-license-plugin:$versions.licenses",
 
-        app_compat                : "androidx.appcompat:appcompat:$versions.app_compat",
-        exif_interface            : "androidx.exifinterface:exifinterface:$versions.exif_interface",
+        app_compat               : "androidx.appcompat:appcompat:$versions.app_compat",
+        exif_interface           : "androidx.exifinterface:exifinterface:$versions.exif_interface",
         material                 : "com.google.android.material:material:$versions.material",
 
         dagger                   : "com.google.dagger:dagger:$versions.dagger",
@@ -23,6 +23,6 @@ ext.deps = [
 
         junit                    : "junit:junit:$versions.junit",
         android_junit            : "androidx.test.ext:junit:$versions.androidjunit",
-        mockito                  : "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito",
+        mockito                  : "org.mockito.kotlin:mockito-kotlin:$versions.mockito",
         mockito_inline           : "org.mockito:mockito-inline:$versions.mockito_inline"
 ]
