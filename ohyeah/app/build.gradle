@@ -33,7 +33,6 @@ dependencies {
 
     testImplementation "$deps.junit"
     testImplementation "$deps.mockito"
-    testImplementation "$deps.mockito_inline"
 
     implementation project(':conversations')
     implementation project(':database')

@@ -19,7 +19,6 @@
             android:layout_height="@dimen/s32dp"
             android:layout_alignTop="@id/message_view_text"
             android:layout_marginEnd="@dimen/s8dp"
-            android:layout_marginRight="@dimen/s8dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:contentDescription="@string/message_image"
@@ -45,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/message_view_text"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:textSize="@dimen/s12sp"
             tools:text="9:50 PM" />
     </RelativeLayout>

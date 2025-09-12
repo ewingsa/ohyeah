@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -24,14 +25,14 @@ class WheelComponent(context: Context, attrs: AttributeSet) : FrameLayout(contex
         }
 
     @ColorInt
-    private var selectedItemColor: Int
+    private var selectedItemColor: Int = 0
 
     @ColorInt
-    private var closeItemColor: Int
+    private var closeItemColor: Int = 0
 
     @ColorInt
-    private var normalItemColor: Int
-    private var selectedItemTextSize: Float
+    private var normalItemColor: Int = 0
+    private var selectedItemTextSize: Float = 0f
     private var closeItemTextSize: Float
     private var normalItemTextSize: Float
 
@@ -40,13 +41,24 @@ class WheelComponent(context: Context, attrs: AttributeSet) : FrameLayout(contex
     private var preSnapDistanceToCenter = -1
 
     init {
-        context.obtainStyledAttributes(attrs, R.styleable.WheelComponent).run {
+        context.withStyledAttributes(attrs, R.styleable.WheelComponent) {
             items = getTextArray(R.styleable.WheelComponent_android_entries).toMutableList()
-            selectedItemColor = getColor(R.styleable.WheelComponent_android_textColor, ContextCompat.getColor(context, R.color.wheel_selected_item))
-            closeItemColor = getColor(R.styleable.WheelComponent_closeItemColor, ContextCompat.getColor(context, R.color.wheel_close_item))
-            normalItemColor = getColor(R.styleable.WheelComponent_normalItemColor, ContextCompat.getColor(context, R.color.wheel_normal_item))
-            selectedItemTextSize = getDimensionPixelSize(R.styleable.WheelComponent_android_textSize, DEFAULT_TEXT_SIZE).toFloat()
-            recycle()
+            selectedItemColor = getColor(
+                R.styleable.WheelComponent_android_textColor,
+                ContextCompat.getColor(context, R.color.wheel_selected_item)
+            )
+            closeItemColor = getColor(
+                R.styleable.WheelComponent_closeItemColor,
+                ContextCompat.getColor(context, R.color.wheel_close_item)
+            )
+            normalItemColor = getColor(
+                R.styleable.WheelComponent_normalItemColor,
+                ContextCompat.getColor(context, R.color.wheel_normal_item)
+            )
+            selectedItemTextSize = getDimensionPixelSize(
+                R.styleable.WheelComponent_android_textSize,
+                DEFAULT_TEXT_SIZE
+            ).toFloat()
         }
         while (items.size < MINIMUM_ITEMS) {
             items.addAll(items)
