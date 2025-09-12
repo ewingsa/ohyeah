@@ -1,6 +1,5 @@
 package com.ewingsa.ohyeah.setreminder
 
-import android.net.Uri
 import com.ewingsa.ohyeah.setreminder.SetReminderInteractor.Companion.AM_VALUE
 import com.ewingsa.ohyeah.setreminder.SetReminderInteractor.Companion.PM_VALUE
 import com.ewingsa.ohyeah.setreminder.helpers.WheelComponentHelper
@@ -68,10 +67,10 @@ class ReminderViewModelTest {
 
     @Test
     fun testSetSenderPicture() {
-        val uri: Uri = mock()
-        reminderViewModel.senderPicture = uri
+        val pictureUrl = "abc"
+        reminderViewModel.senderPicture = pictureUrl
 
-        assertEquals(uri, reminderViewModel.reminderDataModel.senderPicture)
+        assertEquals(pictureUrl, reminderViewModel.reminderDataModel.senderPicture)
     }
 
     @Test

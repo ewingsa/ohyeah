@@ -24,5 +24,4 @@ ext.deps = [
         junit                    : "junit:junit:$versions.junit",
         android_junit            : "androidx.test.ext:junit:$versions.androidjunit",
         mockito                  : "org.mockito.kotlin:mockito-kotlin:$versions.mockito",
-        mockito_inline           : "org.mockito:mockito-inline:$versions.mockito_inline"
 ]

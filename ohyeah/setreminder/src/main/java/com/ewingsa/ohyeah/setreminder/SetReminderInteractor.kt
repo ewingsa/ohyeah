@@ -124,7 +124,7 @@ class SetReminderInteractor @Inject constructor(
             Sender(
                 0,
                 reminderDataModel?.sender ?: resources.getString(MainR.string.app_name),
-                reminderDataModel?.senderPicture?.toString()
+                reminderDataModel?.senderPicture
             )
         )
     }
@@ -184,7 +184,7 @@ class SetReminderInteractor @Inject constructor(
             it.senderId?.let { senderId ->
                 repository.updateSenderName(senderId, it.sender)
                 it.senderPicture?.let { uri ->
-                    repository.updateSenderPicture(senderId, uri.toString())
+                    repository.updateSenderPicture(senderId, uri)
                 }
             }
         }

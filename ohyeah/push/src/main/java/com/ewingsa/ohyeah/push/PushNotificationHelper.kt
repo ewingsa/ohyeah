@@ -12,13 +12,13 @@ import android.graphics.Bitmap
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.O
 import android.os.Build.VERSION_CODES.Q
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.net.toUri
 import com.ewingsa.ohyeah.resources.R as MainR
 
 object PushNotificationHelper {
@@ -48,7 +48,7 @@ object PushNotificationHelper {
             notificationManager?.createNotificationChannel(channel)
         }
 
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(senderId.toString())).apply {
+        val intent = Intent(Intent.ACTION_VIEW, senderId.toString().toUri()).apply {
             setClassName(context, MAIN_ACTIVITY_CLASS_NAME) // If the class itself was specified, the push module would depend on the app module
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }

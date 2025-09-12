@@ -69,7 +69,7 @@ class ConversationsInteractor @Inject constructor(
         while (index < conversations.size) {
             val conversation = conversations[index]
 
-            if (conversation.message.timestamp > now && !upcomingLabelAdded && dataModels.size > 0) {
+            if (conversation.message.timestamp > now && !upcomingLabelAdded && dataModels.isNotEmpty()) {
                 dataModels.add(UpcomingLabelDataModel())
                 upcomingLabelAdded = true
             }

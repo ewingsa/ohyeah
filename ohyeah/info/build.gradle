@@ -19,7 +19,6 @@ dependencies {
 
     testImplementation "$deps.junit"
     testImplementation "$deps.mockito"
-    testImplementation "$deps.mockito_inline"
 
     implementation project(':injection')
     implementation project(':resources')
